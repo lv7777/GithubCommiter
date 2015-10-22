@@ -1,33 +1,29 @@
 {
-    "manifest_version":0,
+    "description":"Adds commit to github that edit html ",
+    "manifest_version":2,
     "name":"GithubCommiter",
-    "version":"0.1",
+    "version":"1.0",
     
     
-    "appliactions":{
+    "applications":{
         "gecko":{
             "id":"GithubCommiter@lv7777"
         }
     },
     
     "browser_action":{
-        "defaulticon":"browseraction/sakenomi.bmp",
-        "defaulttitle":"setting"
-    },
+        "defaulticon":"browseraction/medium.png",
+        "defaulttitle":"setting",
+        "default_popup":"browseraction/setting.html"
+            },
     
     "background":{
-      "scripts":[],
-      "pages":""
+      "scripts":["backgroundpages/backgroundscript.js"]
     },
     
     "content_scripts":[
         {
             "js":["lib/jquery.min.js","content_scripts/content_scripts"]
         }
-    ],
-    
-    "web_accessible_resources":[
-        
-    ]
-    
+    ]    
 }
