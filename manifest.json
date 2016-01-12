@@ -1,0 +1,13 @@
+{
+    "manifest_version":0,
+    "name":"GithubCommiter",
+    "version":"0.1",
+    
+    
+    "appliactions":{
+        "gecko":{
+            "id":"GithubCommiter@lv7777"
+        }
+    }
+    
+}
