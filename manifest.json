@@ -8,6 +8,25 @@
         "gecko":{
             "id":"GithubCommiter@lv7777"
         }
-    }
+    },
+    
+    "browser_action":{
+        
+    },
+    
+    "background":{
+      "scripts":[],
+      "pages":""
+    },
+    
+    "content_scripts":[
+        {
+            "js":[]
+        }
+    ],
+    
+    "web_accessible_resources":[
+        
+    ]
     
 }
