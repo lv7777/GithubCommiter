@@ -1,2 +1,3 @@
 this is addon that commit file edited by a browser to github file editing on browser
-•¶@–@@‚±@‚í@‚ê@‚é
+
+ï¿½ï¿½ï¿½@ï¿½@ï¿½@ï¿½ï¿½ï¿½@ï¿½ï¿½ï¿½@ï¿½ï¿½ï¿½@ï¿½ï¿½
