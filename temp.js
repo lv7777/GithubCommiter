@@ -29,7 +29,6 @@ class Github{
   }
   
   create(data) {
-  
     var data = JSON.stringify({
   "message": "my commit message",
   "branch": "master",
@@ -56,6 +55,8 @@ xhr.send(data);
     
     
   }
+  
+  
   update(data) {
     
     var sha = getsha1(this.path);
@@ -66,6 +67,8 @@ xhr.send(data);
   "content": "bXkgbmV3IGZpbGUgY29udGVudHM=",
   "sha": sha
 });
+
+
 
 var xhr = new XMLHttpRequest();
 xhr.withCredentials = true;
