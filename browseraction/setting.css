@@ -21,3 +21,8 @@ h1{
 .save{
     margin: 20px 40px;
 }
+
+select[class$="group"]{
+    width: 50%;
+    margin: 10px auto;
+}
