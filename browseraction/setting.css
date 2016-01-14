@@ -1,0 +1,21 @@
+*{
+    text-align: center;
+        
+}
+
+h1{
+    padding: 10 0 10 0;
+    font-size: 150%;
+}
+
+.githubgroup{
+    background-color: #c2e6b8;
+        
+}
+
+.localgroup{
+    background-color: #b5b5f2;
+}
+.save{
+    margin: 20px 40px;
+}

@@ -7,11 +7,15 @@
         <script src="setting.js"></script>
     </head>
     <body>
-        <div>
+        <div class="main">
+            
+        
+        <div class="mainselect">
             <label>githubに保存する:<input type="checkbox"></label><br>
             <label>localに保存する:<input type="checkbox"></label>
         </div>
-        <div>           
+        <div class="githubgroup"> 
+            <p><h1>githubにcommitする時の設定</h1></p>          
             <label >username:<input type="text" id="username" class="form-control"></label>
             <label >password:<input type="password" id="pass" class="form-control"></label>
             <label >githubに送った時に保存されるディレクトリ:<input type="text" id="repo" class="form-control"></label>
@@ -27,8 +31,9 @@
             </select>
         </div>
         
-        local
-        <div>
+        
+        <div class="localgroup">
+            <p><h1>localに保存する時の設定</h1></p>
         <select name="" id="savetime" class="form-control">
             <option value="30000">3秒</option>
             <option value="600000">1分</option>
@@ -40,6 +45,6 @@
         </select>
         </div>        
         <button type="submit" class="btn btn-default">Save</button>
-        
+        </div>
     </body>
 </html>
