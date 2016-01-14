@@ -22,7 +22,7 @@
     
     "content_scripts":[
         {
-            "js":["content_scripts/content_scripts"]
+            "js":["lib/jquery.min.js","content_scripts/content_scripts"]
         }
     ],
     
