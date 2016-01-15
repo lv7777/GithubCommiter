@@ -22,20 +22,41 @@ $github_checkbox.click(background);
 function background(e){
     //onにすると設定ができるようになる。
 }
-$(".save").click(check);
-function check(e){
-    if(check_to_github()){
-        
-    //あったら保存
-    }else{
-        
-    //なければダイアログを出す。
-    //エラーが出てる部分の上に赤い文字でエラーを出したり、inputを赤くする。
-    }
-    
+$(".save").click(checkmain);
+
+function checkmain(e){
+    console.log("fe");
+    sendgithub()
 }
-function check_to_github(){
-    //username,password,ripoを読みだし,fetchで確認。
+
+function sendgithub(){
+    console.log("fefe");
+    var user=$username;
+    
+   var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+      
+      var res=JSON.parse(this.responseText);
+      dataparse(res)
+
+  }
+});
+
+xhr.open("GET", "https://api.github.com/users/"+user+"repos");
+xhr.send(null);
+     
+}
+
+
+function dataparse(res){
+    //xhrで帰ってきたオブジェクトを整形して確認する。
+    console.log(res);
+    console.log(res.name);
+
+    
     if(1){
         return 1;
     }else{
@@ -45,3 +66,16 @@ function check_to_github(){
     
     
 });
+
+
+function last(bool){
+    if(0){
+        
+    //あったら保存
+    }else{
+        
+    //なければダイアログを出す。
+    //エラーが出てる部分の上に赤い文字でエラーを出したり、inputを赤くする。
+    }
+    
+}
