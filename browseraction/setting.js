@@ -25,11 +25,33 @@ $(function () {
     $(".save").click(checkmain);
 
     function checkmain(e) {
-        sendgithub()
+       last(true);
+       // check_inputdata();
+        //sendgithub();
+    }
+    
+    //データがちゃんと入力されているかどうか。
+    function check_inputdata(){
+        $ltime = $("#localtime");
+        $gtime = $("#githubtime");
+        $url = $("#url");
+        $repo = $("#repo");
+        $pass = $("#pass");
+        $username = $("#username");
+        let inputarray = [$ltime, $gtime, $url,$repo,$pass,$username];
+        
+        for(let i of inputarray){            
+            if(i.val()===""){
+
+                inputerror(i);
+            }
+        }
+        
+        
+        
     }
 
     function sendgithub() {
-        console.log("fefe");
         var user = $("#username").val();//.text();
         //inputにはval()を使う
         var xhr = new XMLHttpRequest();
@@ -69,9 +91,24 @@ $(function () {
 
 
         function last(bool) {
-            if (0) {
+            if (bool) {
+                //あったらlocalstrageに保存
+                
+                $ltime = $("#localtime");
+                $gtime = $("#githubtime");
+                $url = $("#url");
+                $repo = $("#repo");
+                $pass = $("#pass");
+                $username = $("#username");
+                let inputarray = [$ltime, $gtime, $url, $repo, $pass, $username];
         
-                //あったら保存
+                //:TODO localstrageが使えるかの確認
+                
+                //もしかしたらbackgroundscriptに投げることが必要かも
+                for (let i of inputarray) {
+                    localStorage.setItem(i.attr("id"),i.val())
+                }
+                
             } else {
         
                 //なければダイアログを出す。
@@ -80,6 +117,11 @@ $(function () {
 
         }
 
+
+        function inputerror(inputjquery){
+             //エラーが出てる部分の上に赤い文字でエラーを出したり、inputを赤くする。
+        }
+        
     });
 
 
