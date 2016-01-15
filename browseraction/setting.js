@@ -1,6 +1,6 @@
 $(function(){
     
-alert(jQuery);//ok
+//alert(jQuery);//ok
 $github_checkbox=$("#githubon");
 $local_checkbox=$("#localon");
 
@@ -8,6 +8,10 @@ $local_checkbox=$("#localon");
 $ltime=$("#localtime");
 $gtime=$("#githubtime");
 $url=$("#url");
+$url.click(function e(){
+    //クリックされると<input>が増える。
+    
+})
 $repo=$("#repo");
 $pass=$("#pass");
 $username=$("#username");
@@ -25,7 +29,7 @@ function check(e){
     }else{
         
     //なければダイアログを出す。
-        
+    //エラーが出てる部分の上に赤い文字でエラーを出したり、inputを赤くする。
     }
     
 }
