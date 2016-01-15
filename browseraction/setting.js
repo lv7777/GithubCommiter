@@ -31,11 +31,11 @@ function checkmain(e){
 
 function sendgithub(){
     console.log("fefe");
-    var user=$username;
+    var user=$("#username").text();
     
    var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
 
+    console.log("fefef");
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
       
