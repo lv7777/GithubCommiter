@@ -26,6 +26,16 @@ h1{
     width: 50%;
     margin: 10px auto;
 }
+/*
 #url{
     margin:10px
+}
+*/
+label{
+    display: inline;
+    margin:5px;
+}
+.form-control{
+    width:50%;
+    margin: 10px auto;
 }
