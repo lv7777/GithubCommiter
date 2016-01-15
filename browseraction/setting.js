@@ -8,9 +8,10 @@ $local_checkbox=$("#localon");
 $ltime=$("#localtime");
 $gtime=$("#githubtime");
 $url=$("#url");
-$url.click(function e(){
+$url.click(function (e){
     //クリックされると<input>が増える。
-    
+    //tureはeventもコピーするか
+    $(this).clone(true).insertAfter(this);
 })
 $repo=$("#repo");
 $pass=$("#pass");
