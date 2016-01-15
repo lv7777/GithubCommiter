@@ -118,8 +118,11 @@ $(function () {
         }
 
 
-        function inputerror(inputjquery){
+        function inputerror(jq){
              //エラーが出てる部分の上に赤い文字でエラーを出したり、inputを赤くする。
+            // jq.after("未入力です。")
+             jq.css("border-color","#fb4721");
+             jq.css("box-shadow","inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233, 102, 102, 0.6)");
         }
         
     });
