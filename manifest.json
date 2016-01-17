@@ -12,8 +12,8 @@
     },
     
     "browser_action":{
-        "defaulticon":"browseraction/medium.png",
-        "defaulttitle":"setting",
+        "default_icon":"browseraction/medium.png",
+        "default_title":"setting",
         "default_popup":"browseraction/setting.html"
             },
     
