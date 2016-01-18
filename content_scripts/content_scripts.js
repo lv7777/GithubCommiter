@@ -44,26 +44,32 @@ function  analyseSchime(path){
     
     schime="uri";
   }else{
-    throw new Error("まずいですよ！";)
+    throw new Error("まずいですよ！");
   }
-  return schime;
-    
-  }
-  
+  return schime;  
 }
 
 
 
 
-(function check(){
-  if(document.designMode=="on"){
-    console.log("ok");
-    var src = getdata();
-    sendbackgroundscript( getFileName(),getDomain(),src);
-  }else{
-      console.log("no active");
-      setTimeout(check,3000);
-  } 
-})();
+//(
+function check(){
+    if(1){//正規表現にマッチしているか？
+        
+        if (document.designMode == "on") {
+            console.log("ok");
+            var src = getdata();
+            //sendbackgroundscript( getFileName(),getDomain(),src);
+        } else {
+            console.log("no active");
+            setTimeout(check, 3000);
+        } 
+        
+    }
+
+}
+//)();
 
 
+console.log("?");
+check();
