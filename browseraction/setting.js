@@ -25,6 +25,7 @@ $(function () {
     $(".save").click(checkmain);
 
     function checkmain(e) {
+       console.log("checkmain");
        last(true);
        // check_inputdata();
         //sendgithub();

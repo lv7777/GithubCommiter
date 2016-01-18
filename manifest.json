@@ -28,5 +28,12 @@
             "matches":["<all_urls>"],
             "js":["lib/jquery.min.js","content_scripts/content_scripts.js"]
         }
-    ]    
+    ],
+    
+  "permissions": [
+    "*://api.github.com/*","storage","webRequest","tabs"
+  ]
+    
+    
+     
 }
