@@ -18,8 +18,11 @@
             <label >username:<input type="text" id="username" class="form-control"></label>
             <label >password:<input type="password" id="pass" class="form-control"></label>
             <label >リポジトリ:<input type="text" id="repo" class="form-control"></label>
-            <label >githubに送った時に保存されるディレクトリ（廃止予定）:<input type="text" id="path" class="form-control"></label>
-            <label >このアドオンが有効化されるurl(正規表現):<input type="text" id="url" class="form-control url"></label>
+                <label >githubに送った時に保存されるディレクトリ（廃止予定）:<input type="text" id="path" class="form-control"></label>
+            <div class="flexbox">
+                <label class="tes" >このアドオンが有効化されるurl(正規表現):<input type="text" id="url" class="form-control url"></label>            
+                <label class="tes2">それに対応するXpath<input class="form-control xpath" id="url" type="text"></label>
+            </div>
             <select name="github_time" id="" class="form-control savetime">
                 <option value="100000">10秒</option>
                 <option value="600000">1分</option>
