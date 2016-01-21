@@ -12,9 +12,14 @@ $(function () {
         e.preventDefault();
         //okクリックされると<input>が増える。
         //tureはeventもコピーするか
-        console.log(e);
-        console.log(this)
-        $(this).clone(true).insertAfter(this);
+       console.log(e);
+       console.log(this);
+       let existElem=$(this);
+       let existNum=existElem.attr("class");
+       let newElem= existElem.clone(true);
+       newElem.insertAfter(this);
+       existNum=existNum-0;//数値化。そもそもclassからちゃんと取れてるのか？
+       newElem.attr("class",existNum+1);
         
     })
     $repo = $("#repo");
@@ -30,7 +35,7 @@ $(function () {
 
     function checkmain(e) {
        console.log("checkmain");
-       last(true);
+       saveStrage(true);
        // check_inputdata();
         //sendgithub();
     }
@@ -94,7 +99,7 @@ $(function () {
     }
 
 
-        function last(bool) {
+        function saveStrage(bool) {
             if (bool) {
                 //あったらlocalstrageに保存
                 
@@ -106,8 +111,7 @@ $(function () {
                var $repo = $("#repo");
                var $pass = $("#pass");
                var $username = $("#username");
-               
-               encodejson();
+
                
                 let inputarray = [ $ltime,$gtime,$url, $repo, $pass, $username];
                 var obj = {};
@@ -118,6 +122,7 @@ $(function () {
                     obj[i.attr("id")] = i.val()
                 }
                 chrome.storage.local.set(obj, function () { });
+                chrome.storage.local.set(getRegEx_Xpath_object(), function () { });
                 console.log(obj);
             } else {
         
@@ -140,8 +145,15 @@ $(function () {
 
 //TODO: 一回localstrageを変える(他のタブに移動したり、ブラウザを再起動させると)消える？
 //regexとxpathの組み合わせをオブジェクトにしていく。
-//xpathに何も書いていなければ全ての要素を取る
-function encodejson(){
+//TODO:xpathに何も書いていなければ全ての要素を取る
+function getRegEx_Xpath_object(){
     var obj={};
-    return obj;
+    
+    var cnt=0;
+    var url,xpath;
+    while(    url=$( ".url"+(cnt.toString()) ) && xpath=$( ".xpath"+(cnt.toString()) )   ){//どっちにも要素が存在するなら
+        obj[url.val()]=xpath.val();
+        cnt++
+    }
+    return JSON.stringify(obj);
 }
