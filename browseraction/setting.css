@@ -39,3 +39,19 @@ label{
     width:50%;
     margin: 10px auto;
 }
+
+.flexbox{
+    background-color: #c2e;
+    display: flex;
+    margin: 0 40px;
+}
+.xpath{
+   width: 50%; 
+}
+.url{
+    width: 50%;
+}
+
+html,css{
+    width: 600px
+}
