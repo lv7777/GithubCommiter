@@ -9,13 +9,13 @@ $(function () {
     $gtime = $("#githubtime");
     $inputhash = $(".flexbox");
     $inputhash.click(function (e) {
-        e.preventDefault();
+        //e.preventDefault();
         //okクリックされると<input>が増える。
         //tureはeventもコピーするか
        console.log(e);
        console.log(this);
        let existElem=$(this);
-       let existNum=existElem.attr("class");
+       let existNum=existElem.attr("class");//ここで取ってきてるのはflexbox class
        let newElem= existElem.clone(true);
        newElem.insertAfter(this);
        existNum=existNum-0;//数値化。そもそもclassからちゃんと取れてるのか？
@@ -70,8 +70,7 @@ $(function () {
             if (this.readyState === 4) {
 
                 var res = JSON.parse(this.responseText);
-                last(dataparse(res))
-
+                saveStrage(dataparse(res))
             }
         });
 
@@ -151,9 +150,15 @@ function getRegEx_Xpath_object(){
     
     var cnt=0;
     var url,xpath;
-    while(    url=$( ".url"+(cnt.toString()) ) && xpath=$( ".xpath"+(cnt.toString()) )   ){//どっちにも要素が存在するなら
+    while(url.val()&&xpath.val()){//どっちにも要素が存在するなら
         obj[url.val()]=xpath.val();
-        cnt++
+        cnt++;
+        
+        // url=$( ".url"+cnt) ) && xpath=$( ".xpath"+cnt ) をwhileにしたら
+        //なんかバグってる
+         url=$(".url"+cnt)
+         xpath=$(".xpath"+cnt ) 
+        
     }
     return JSON.stringify(obj);
 }
