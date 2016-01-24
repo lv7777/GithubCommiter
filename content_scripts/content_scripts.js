@@ -3,8 +3,8 @@
 (function init() {
     //setting.jsからchrome.strage.localに保存したデータの読み出し
     //TODO:"object{url:xpath}"なデータを追加urlの正規表現がキーでvalはそのURLのどの部分のhtmlを抜き出すかのxpath
-    chrome.storage.local.get(["url", "repo", "pass", "username"], function (result) {
-        console.log(result.url, result.repo, result.pass, result.username);
+    chrome.storage.local.get(["url", "repo", "pass", "username", "RegEx_Xpath_obj"], function (result) {
+        console.log(result.url, result.repo, result.pass, result.username, result.RegEx_Xpath_obj);
         if (checkRegEx(result.url)) {//正規表現にマッチしているか？        
             console.log(result);
             main(result);
@@ -12,27 +12,33 @@
     });
 })();
 
+
+//未テスト
 function checkRegEx(reg) {
     //TODO:中身を作る
     //TODO:データ構造を変更
     //regはオブジェクトにする予定
     console.log(reg);
-    return 1;
+    var url = window.location.href;
+    for (var i in reg) {
+        if (i.test(url){
+           return 1;
+        }
+    }
+    return 0;
 }
 function main(d) {
     if (document.designMode == "on") {
         console.log(d);
-        var src = getpagedocument("url:xpath");
+        var src = getpagedocument(d.RegEx_Xpath_obj);
         var encodesrc = window.btoa(unescape(encodeURIComponent(src)));
+        var urlobj = analyzeURL();//2回呼んでる。メモリ的にアレ
         if (filesendAPIararysis(d.username, d.repo, d.pass)) {
             //update
-            
-            
+            update(encodesrc, d.username, d.pass, d.repo, urlobj.dirpath, urlobj.filename);
         } else {
             //create
-            
-            
-            
+            create(encodesrc, d.username, d.pass, d.repo, urlobj.dirpath, urlobj.filename);
         }
     } else {
         console.log("no active");
@@ -53,76 +59,75 @@ function getpagedocument(contentxpath) {
  
 //TODO:ちゃんと作る。
 //ファイル名をurlから取得
-function getFileName() {
-    var filename = "default.html";
-    var path = window.location.href;
-
-    var arr = path.match(/.*\/(.*?\..*)/);//別解  [^/]*$
+function getFileName(o) {
+    var lastdomain = o.domainarr[o.domainarr.length - 1]
+    var patharr = o.patharr;
+    var filename = "";
     //最後のスラッシュの前まで。
     //もし最後がスラッシュで終わってたらその前のスラッシュまでを取ってくる
-    //もしそれがドメインなら取らずにdefault.htmlにする
-    //もしdefault.htmlがすでにあるなら新しくランダムでHTMLを決定。
-    filename = arr[1];
+    if (patharr[patharr.length - 1] === "") {
+        filename = patharr[patharr.length - 2];
+        if (patharr[patharr.length - 2] === lastdomain) {
+            //もしそれがドメインなら取らずにdefault.htmlにする
+            filename = "default.html";
+
+            if (0) {
+                //これは面倒だしその確率は殆ど無いからいいや
+                //もしdefault.htmlがすでにあるなら新しくランダムでHTMLを決定。
+             
+            }
+
+        }
+    }
+
+    if (0) {
+        //設定に自動的に拡張子htmlをつけるにチェックが入っている場合、htmlをつける。
+        filename = filename + ".html"
+
+    }
     return filename;
-
 }
-function getDomain() {
-    var domain = [];//[第一ドメイン,第二ドメイン,第三ドメイン]
-    //http or https
-    if (analyseSchime() === "uri") {
-        //どっかから持ってくる
-      
-        var arr_uri = window.location.href.match(/^(.*?:\/\/)(.*?)([a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})[\:[0-9]*]?([\/].*?)?$/i);
-        console.log(arr_uri);
-        return domain;
+function analyzeURL() {
+    var retobj = {};
+    /*
+    {
+        allurl:URL全て
+        urlarr:各部分をarrに分割
+        
     }
-
-}
-//Schemeを判断します。
-function analyseSchime(path) {
-    var schime = "";
-    path = window.location.href;
-
-    var fileSchimeRegEx = /file:\/\/\//;
-    var uriSchimeRegEx = /https?:\/\//;
-    //ifでやるならやっぱtestが一番かな。str.matchはgflagがついてないと
-    if (fileSchimeRegEx.test(path)) {
-        //fileSchemeなら
-        schime = "file";
-    } else if (uriSchimeRegEx.test(path)) {
-        //URI系なら
+     */
     
-    
-        schime = "uri";
-    } else {
-        throw new Error("まずいですよ！");
-    }
-    return schime;
+    //部分に分割
+    retobj.allurl = window.location.href;
+    //汚いobjだなあ
+    var arr = retobj.allurl.match(/^(.*?)(\:\/\/\/?)(.*?)[\:[0-9]*]?(\/.*?)?$/i);//でもこれよく考えたら認証情報がドメインパートにはいってるな
+    retobj.urlarr = arr;
+    retobj.schimeonly = arr[1];
+    retobj.urisubpart = arr[2];
+    retobj.domainall = arr[3];
+    retobj.pathall = arr[4];
+
+    retobj.domainarr = retobj.domainall.split(".");
+    retobj.patharr = retobj.pathall.split("/");
+    retobj.filename = getFileName(retobj);
+
+    retobj.dirpath = retobj.domainarr.join("/");
+    return retobj;
 }
 
 
 chrome.storage.onChanged.addListener(function (changes, namespace) {
     chrome.storage.local.get(["url", "repo", "pass", "username"], function (result) {
         console.log(result.url, result.repo, result.pass, result.username);
-        // create2(encodesrc,result.username,result.pass,"lastremote.txt");
-           
     });
-
 });
 
 
 
 //このファイルはどっちのメソッドで送ればいいかを判断します。
 function filesendAPIararysis(username, repo, pass) {
+    var obj = analyzeURL();
 
-    var arr = window.location.href.match(/.*\/(.*)(\#.*)$/);
-    //arr[1];
-    var arr2 = window.location.href.match(/^(.*?:\/\/)(?:(.*?)\.)*([a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})[\:[0-9]*]?([\/].*?)?$/i);
-    //arr[2]//domain
-    //arr[3]//subdomain
-    //TODO: getfilenameなどを使え。現在はドライバーで済ませてる。
-    //    getDomain();
-    //    getFileName();
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
     xhr.addEventListener('readystatechange', function () {
@@ -131,15 +136,17 @@ function filesendAPIararysis(username, repo, pass) {
             var obj = JSON.parse(this.responseText);
             if (obj.name) {
                 console.log("update")
-            } else if (typeof (obj.name) === undefined || obj.message == "Not Found") {
+                return 1;
+            } else if (typeof(obj.name) === undefined || obj.message == "Not Found") {
                 console.log("use create")
+                return 0;
             }
 
         }
     });
 
 
-    xhr.open("GET", "https://api.github.com/repos/" + username + "/" + repo + "/contents/" + arr2[2] + "/" + arr[1]);
+    xhr.open("GET", "https://api.github.com/repos/" + username + "/" + repo + "/contents/" + obj.dirpath + "/" + obj.filename);
     xhr.send(null);
 }
 
