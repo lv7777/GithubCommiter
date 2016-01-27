@@ -17,9 +17,14 @@ $(function () {
        let existElem=$(this);
        let existNum=existElem.attr("class");//ここで取ってきてるのはflexbox class
        let newElem= existElem.clone(true);
+       var num=existNum.substr(-1,1)-0;
+       if(typeof num==="number"){
+           num++;
+       }else{
+           num=0;
+       }
        newElem.insertAfter(this);
-       existNum=existNum-0;//数値化。そもそもclassからちゃんと取れてるのか？
-       newElem.attr("class",existNum+1);
+       newElem.attr("class","flexbox"+num);
         
     })
     $repo = $("#repo");
