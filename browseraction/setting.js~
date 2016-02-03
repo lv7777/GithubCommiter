@@ -97,25 +97,40 @@ $(function () {
                 
               //  $ltime = $("#localtime");
               //  $gtime = $("#githubtime");
-              
-              
-               var $url = $("#url");
-               var $repo = $("#repo");
-               var $pass = $("#pass");
-               var $username = $("#username");
-                let inputarray = [ $url, $repo, $pass, $username];
-                var obj = {};
+                $url = $("#url");
+                $repo = $("#repo");
+                $pass = $("#pass");
+                $username = $("#username");
+                let inputarray = [$ltime, $gtime, $url, $repo, $pass, $username];
+                            chrome.storage.local.set({$pass.attr("id"):"fefefeaa"}, function () {
+                        // ここにset終わったあとの処理
+                        console.log(key+"    cici    "+val);
+                    });
+                //:TODO localstrageが使えるかの確認
                 
                 //もしかしたらbackgroundscriptに投げることが必要かも
                 for (var i of inputarray) {
-                    // localStorage.setItem(i.attr("id"), i.val())
-                    var key = i.attr("id");
-                    var val = i.val();
-
-                    obj[i.attr("id")] = i.val()
+                   // localStorage.setItem(i.attr("id"), i.val())
+                   var key=i.attr("id");
+                   key=key.toString();
+                   var val=i.val();
+                   var obj={key:val};
+                   console.log(key+"    IN    "+val);
+                    chrome.storage.local.set(obj, function () {
+                        // ここにset終わったあとの処理
+                        console.log(key+"    END    "+val);
+                    });
+ /*                   chrome.storage.local.set({"fe":"hello!"}, function () {
+                        // ここにset終わったあとの処理
+                        console.log("fe");
+                    });
+                    chrome.storage.local.get("fe", function (a) {
+                        // ここにset終わったあとの処理
+                        console.log(a.fe);
+                    });
+                    */
                 }
-                chrome.storage.local.set(obj, function () { });
-                console.log(obj);
+                
             } else {
         
                 //なければダイアログを出す。

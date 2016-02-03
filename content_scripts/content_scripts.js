@@ -56,10 +56,20 @@ function  analyseSchime(path){
 function check(){
     if(1){//正規表現にマッチしているか？
         
-        if (document.designMode == "on") {
+        if (/*document.designMode == "on"*/  1) {
             console.log("ok");
             var src = getdata();
             //sendbackgroundscript( getFileName(),getDomain(),src);
+            var encodesrc=window.btoa(unescape(encodeURIComponent(src)))
+            
+            
+
+            chrome.storage.local.get(["url","repo","pass","username"], function (result) {
+                console.log( result.url,result.repo, result.pass, result.username);
+               // create2(encodesrc,result.username,result.pass,"lastremote.txt");
+           
+            });
+            
         } else {
             console.log("no active");
             setTimeout(check, 3000);
@@ -71,5 +81,89 @@ function check(){
 //)();
 
 
-console.log("?");
+//sconsole.log("?");
 check();
+
+/*
+  function create(encodedata) {
+        var data = JSON.stringify({
+            "message": "my commit message",
+            "branch": "master",
+            "content": encodedata
+        });
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                console.log(this.responseText);
+            }
+        });
+
+        xhr.open("PUT", "https://api.github.com/repos/lv7777/WebOS/contents/firstextension2.txt");
+        xhr.setRequestHeader("authorization", "Basic bHY3Nzc3OmltaW5vNzFtb2ppcmV0dW51bGw=");
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.setRequestHeader("cache-control", "no-cache");
+
+        xhr.send(data);
+
+
+
+
+    }
+
+ 
+
+*/
+  function create2(encodedata,username,pass,path) {
+        var data = JSON.stringify({
+            "message": "my commit message",
+            "branch": "master",
+            "content": encodedata
+        });
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                console.log(this.responseText);
+            }
+        });
+
+        xhr.open("PUT", "https://api.github.com/repos/"+username+"/WebOS/contents/"+path);
+        let basic=window.btoa(unescape(encodeURIComponent(username+":"+pass)));
+        xhr.setRequestHeader("authorization", "Basic "+basic);
+        
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.setRequestHeader("cache-control", "no-cache");
+
+        xhr.send(data);
+
+
+
+
+    }
+
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+
+/*            
+                    for (var key in changes) {
+          var storageChange = changes[key];
+          console.log('Storage key "%s" in namespace "%s" changed. ' +
+                      'Old value was "%s", new value is "%s".',
+                      key,
+                      namespace,
+                      storageChange.oldValue,
+                      storageChange.newValue);
+        }
+ */           
+            chrome.storage.local.get(["url","repo","pass","username"], function (result) {
+                console.log(result.url,result.repo, result.pass, result.username);
+               // create2(encodesrc,result.username,result.pass,"lastremote.txt");
+           
+            });
+            
+});

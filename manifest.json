@@ -6,13 +6,7 @@
     "icons": {
   "32": "browseraction/medium.jpg"
      },
-    
-    "applications":{
-        "gecko":{
-            "id":"GithubCommiter@lv7777"
-        }
-    },
-    
+     
     "browser_action":{
         "default_icon":"browseraction/medium.jpg",
         "default_title":"setting",
