@@ -62,8 +62,6 @@ function check(){
             //sendbackgroundscript( getFileName(),getDomain(),src);
             var encodesrc=window.btoa(unescape(encodeURIComponent(src)))
             
-            
-
             chrome.storage.local.get(["url","repo","pass","username"], function (result) {
                 console.log( result.url,result.repo, result.pass, result.username);
                // create2(encodesrc,result.username,result.pass,"lastremote.txt");
