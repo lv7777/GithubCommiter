@@ -12,8 +12,8 @@ $(function () {
         
         //よくわからんけどthisのclassは全てflexboxになってる
         //FIXME:子要素クリックした時にも発火されるのでそれの制御
-        //labelの要素
-        if (/tes/.test((e.toElement).attr("class")) ) {
+        //labelの要素/tes/.test((e.toElement).attr("class")) 
+        if (0) {
 
             e.preventDefault();
             //一応完成。やったね！
