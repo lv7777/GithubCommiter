@@ -3,4 +3,10 @@
 
 リファクタするものはsetting.jsとcontent_scripts.js
 
-名前は短いコメントだと思え
+# 名前は短いコメントだと思え
+
+getpagedocumentとかわかりにくいかも
+at p10
+シソーラスを使え。
+
+

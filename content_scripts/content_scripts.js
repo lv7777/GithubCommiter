@@ -57,10 +57,10 @@ function main(d) {
 
 function getpagedocument(contentxpath) {
     //設定からどこのhtml要素を読み込むか判断する。e.g. MDNならedit部分とか    
-    var alldocument = document.getElementsByTagName("html")[0].innerHTML
+    var htmldocument = document.getElementsByTagName("html")[0].innerHTML
    
     //TODO:文字列からXpathで対象のデータを抜き出して返す。
-    var littlecontent = alldocument;
+    var littlecontent = htmldocument;
     return littlecontent;
 }
  
