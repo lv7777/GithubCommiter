@@ -1,19 +1,23 @@
 $(function () {
-    
-    //alert(jQuery);//ok
+
     $github_checkbox = $("#githubon");
     $local_checkbox = $("#localon");
 
 
     $ltime = $("#localtime");
     $gtime = $("#githubtime");
-    $inputhash = $(".flexbox");
+    $inputhash = $(".flexbox0");
+    
+    $repo = $("#repo");
+    $pass = $("#pass");
+    $username = $("#username");    
+    
     $inputhash.click(function (e) {
         
         //よくわからんけどthisのclassは全てflexboxになってる
         //FIXME:子要素クリックした時にも発火されるのでそれの制御
         //labelの要素/tes/.test((e.toElement).attr("class")) 
-        if (0) {
+        if (e.target.tagName === 'DIV' || e.target.tagName === 'LABEL') {
 
             e.preventDefault();
             //一応完成。やったね！
@@ -39,9 +43,6 @@ $(function () {
             newElem.attr("class", "flexbox" + num);
         }
     });
-    $repo = $("#repo");
-    $pass = $("#pass");
-    $username = $("#username");
 
     $local_checkbox.click(background);
     $github_checkbox.click(background);
@@ -57,24 +58,22 @@ $(function () {
         //sendgithub();
     }
     
-    //データがちゃんと入力されているかどうか。
-    function check_inputdata(){
-        $ltime = $("#localtime");
-        $gtime = $("#githubtime");
-        $url = $("#url");
-        $repo = $("#repo");
-        $pass = $("#pass");
-        $username = $("#username");
+    //データがちゃんと入力されているかどうか。jqueryobjもsavestrageのjqobj持ってきたいよね
+    function check_inputdata(ltime,gtime,url,repo,pass,username){
+       let $ltime = $("#localtime");
+       let $gtime = $("#githubtime");
+       let $url = $("#url");
+       let $repo = $("#repo");
+       let $pass = $("#pass");
+       let $username = $("#username");
+       
         let inputarray = [$ltime, $gtime, $url,$repo,$pass,$username];
-        
+       
         for(let i of inputarray){            
             if(i.val()===""){
                 inputerror(i);
             }
-        }
-        
-        
-        
+        }   
     }
 
     function sendgithub() {

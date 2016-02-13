@@ -21,7 +21,7 @@ function checkRegEx(reg) {
     console.log(reg);
     var url = window.location.href;
     for (var i in reg) {
-        if (i.test(url){
+        if (i.test(url)){
            return 1;
         }
     }
