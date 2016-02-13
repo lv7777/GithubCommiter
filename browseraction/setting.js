@@ -146,8 +146,6 @@ $(function () {
 
                var obj={};
                 let inputarray = [ $ltime,$gtime,$repo, $pass, $username];
-                
-                
                 //もしかしたらbackgroundscriptに投げることが必要かも
                 for (var i of inputarray) {
                     // localStorage.setItem(i.attr("id"), i.val())
@@ -156,7 +154,6 @@ $(function () {
                 obj["RegEx_Xpath_obj"]=regpathobj;
                 chrome.storage.local.set(obj, function () { });
             } else {
-        
                 //なければダイアログを出す。
                 //エラーが出てる部分の上に赤い文字でエラーを出したり、inputを赤くする。
             }
@@ -170,5 +167,4 @@ $(function () {
              jq.css("border-color","#fb4721");
              jq.css("box-shadow","inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233, 102, 102, 0.6)");
         }
-        
     });
