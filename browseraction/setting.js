@@ -156,10 +156,6 @@ $(function () {
                 }
                 obj["RegEx_Xpath_obj"]=regpathobj;
                 chrome.storage.local.set(obj, function () { });
-                
-                //getRegEx_Xpath_object()
-                //chrome.storage.local.set(regpathobj, function () { });
-                console.log(obj);
             } else {
         
                 //なければダイアログを出す。
@@ -177,28 +173,3 @@ $(function () {
         }
         
     });
-/*
-
-//同じ関数２つも書いてて死ゾ
-
-//TODO: 一回localstrageを変える(他のタブに移動したり、ブラウザを再起動させると)消える？
-//regexとxpathの組み合わせをオブジェクトにしていく。
-//TODO:xpathに何も書いていなければ全ての要素を取る
-function getRegEx_Xpath_object(){
-    var obj={};
-    
-    var cnt=0;
-    var url,xpath;
-    while(url.val()&&xpath.val()){//どっちにも要素が存在するなら
-        obj[url.val()]=xpath.val();
-        cnt++;
-        
-        // url=$( ".url"+cnt) ) && xpath=$( ".xpath"+cnt ) をwhileにしたら
-        //なんかバグってる
-         url=$(".url"+cnt)
-         xpath=$(".xpath"+cnt ) 
-        
-    }
-    return JSON.stringify(obj);
-}
-*/
