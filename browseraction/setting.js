@@ -165,7 +165,7 @@ githubのissueみて、どうぞ
                     obj[i.attr("id")] = i.val()
                 }
                 obj["RegEx_Xpath_obj"]=regpathobj;
-                chrome.storage.local.set(obj, function () { });
+                chrome.storage.local.set(obj, (res)=>{console.log(res)});
             } else {
                 //なければダイアログを出す。
                 //エラーが出てる部分の上に赤い文字でエラーを出したり、inputを赤くする。

@@ -10,3 +10,6 @@ at p10
 シソーラスを使え。
 
 settingjsのjqueryオブジェクトをどうするか
+globalに設置してlocalは殺す方向にした。
+# 絶対構造は壊すなよ！
+
