@@ -123,10 +123,11 @@ $(function () {
                var $gtime = $("#github_time");
               
               
-               var $url = $("#url");
-               var $repo = $("#repo");
-               var $pass = $("#pass");
                var $username = $("#username");
+               var $pass = $("#pass");
+               var $repo = $("#repo");
+              // var $githubdir=$("path");
+              // var $url = $("#url");
                
               
                var regpathobj={};
@@ -145,7 +146,7 @@ $(function () {
                
 
                var obj={};
-                let inputarray = [ $ltime,$gtime,$url, $repo, $pass, $username];
+                let inputarray = [ $ltime,$gtime,$repo, $pass, $username];
                 
                 
                 //もしかしたらbackgroundscriptに投げることが必要かも
@@ -153,10 +154,11 @@ $(function () {
                     // localStorage.setItem(i.attr("id"), i.val())
                     obj[i.attr("id")] = i.val()
                 }
+                obj["RegEx_Xpath_obj"]=regpathobj;
                 chrome.storage.local.set(obj, function () { });
                 
                 //getRegEx_Xpath_object()
-                chrome.storage.local.set(regpathobj, function () { });
+                //chrome.storage.local.set(regpathobj, function () { });
                 console.log(obj);
             } else {
         
