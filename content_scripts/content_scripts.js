@@ -52,11 +52,10 @@ function  analyseSchime(path){
 
 
 
-//(
-function check(){
+(function check(){
     if(1){//正規表現にマッチしているか？
         
-        if (/*document.designMode == "on"*/  1) {
+        if (document.designMode == "on") {
             console.log("ok");
             var src = getdata();
             //sendbackgroundscript( getFileName(),getDomain(),src);
@@ -64,7 +63,7 @@ function check(){
             
             chrome.storage.local.get(["url","repo","pass","username"], function (result) {
                 console.log( result.url,result.repo, result.pass, result.username);
-               // create2(encodesrc,result.username,result.pass,"lastremote.txt");
+                create2(encodesrc,result.username,result.pass,"lastremote.txt");
            
             });
             
@@ -75,8 +74,7 @@ function check(){
         
     }
 
-}
-//)();
+})();
 
 
 //sconsole.log("?");
