@@ -7,11 +7,15 @@ $(function () {
 
     $ltime = $("#localtime");
     $gtime = $("#githubtime");
-    $url = $("#url");
-    $url.click(function (e) {
-        //クリックされると<input>が増える。
+    $inputhash = $(".flexbox");
+    $inputhash.click(function (e) {
+        e.preventDefault();
+        //okクリックされると<input>が増える。
         //tureはeventもコピーするか
+        console.log(e);
+        console.log(this)
         $(this).clone(true).insertAfter(this);
+        
     })
     $repo = $("#repo");
     $pass = $("#pass");
@@ -43,7 +47,6 @@ $(function () {
         
         for(let i of inputarray){            
             if(i.val()===""){
-
                 inputerror(i);
             }
         }
@@ -95,23 +98,23 @@ $(function () {
             if (bool) {
                 //あったらlocalstrageに保存
                 
-              //  $ltime = $("#localtime");
-              //  $gtime = $("#githubtime");
+               var $ltime = $("#local_time");
+               var $gtime = $("#github_time");
               
               
                var $url = $("#url");
                var $repo = $("#repo");
                var $pass = $("#pass");
                var $username = $("#username");
-                let inputarray = [ $url, $repo, $pass, $username];
+               
+               encodejson();
+               
+                let inputarray = [ $ltime,$gtime,$url, $repo, $pass, $username];
                 var obj = {};
                 
                 //もしかしたらbackgroundscriptに投げることが必要かも
                 for (var i of inputarray) {
                     // localStorage.setItem(i.attr("id"), i.val())
-                    var key = i.attr("id");
-                    var val = i.val();
-
                     obj[i.attr("id")] = i.val()
                 }
                 chrome.storage.local.set(obj, function () { });
@@ -135,3 +138,10 @@ $(function () {
     });
 
 
+//TODO: 一回localstrageを変える(他のタブに移動したり、ブラウザを再起動させると)消える？
+//regexとxpathの組み合わせをオブジェクトにしていく。
+//xpathに何も書いていなければ全ての要素を取る
+function encodejson(){
+    var obj={};
+    return obj;
+}
