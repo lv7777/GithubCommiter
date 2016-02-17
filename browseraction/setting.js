@@ -18,7 +18,9 @@ $(function () {
        let existNum=existElem.attr("class");//ここで取ってきてるのはflexbox class
        let newElem= existElem.clone(true);
        var num=existNum.substr(-1,1)-0;
-       if(typeof num==="number"){
+       
+       //そもそもisNaN、es6でnumber.isNaNが出て殺される可能性があるんだよなあ
+       if(typeof num==="number"　&& isNaN(num)){
            num++;
        }else{
            num=0;
