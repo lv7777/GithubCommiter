@@ -20,7 +20,7 @@ $(function () {
        var num=existNum.substr(-1,1)-0;
        
        //そもそもisNaN、es6でnumber.isNaNが出て殺される可能性があるんだよなあ
-       if(typeof num==="number"　&& isNaN(num)){
+       if(typeof num==="number"　&& isNaN(num) ){
            num++;
        }else{
            num=0;
