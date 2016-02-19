@@ -19,6 +19,7 @@ $(function () {
        let newElem= existElem.clone(true);
        var num=existNum.substr(-1,1)-0;
        
+       //ちゃんと飛んだはいいけど合計4回もイベントバブリングしてるのやめてください（ガチギレ
        //そもそもisNaN、es6でnumber.isNaNが出て殺される可能性があるんだよなあ
        if(typeof num==="number"　&& !(isNaN(num)) ){
            num++;
@@ -28,7 +29,7 @@ $(function () {
        newElem.insertAfter(this);
        newElem.attr("class","flexbox"+num);
         
-    })
+    });
     $repo = $("#repo");
     $pass = $("#pass");
     $username = $("#username");
