@@ -12,13 +12,17 @@ $(function () {
         //e.preventDefault();
         //okクリックされると<input>が増える。
         //tureはeventもコピーするか
-       console.log(e);
-       console.log(this);
-       let existElem=$(this);
-       let existNum=existElem.attr("class");//ここで取ってきてるのはflexbox class
-       let newElem= existElem.clone(true);
-       var num=existNum.substr(-1,1)-0;
-       
+
+        //flexboxのjqueryobjを全部取ってくる。その中から一番でかい数字を取ってくる。その後一番でかい数字に1を足す。
+        //複数のflexbox
+        
+        //一番でかい数字を保管
+        var num=0;
+        $("div[class^='flexbox']").each(function (i) {
+           num= $(this).attr("class").substr(-1,1);
+           num=num-0;//str to int
+        });
+        
        //ちゃんと飛んだはいいけど合計4回もイベントバブリングしてるのやめてください（ガチギレ
        //そもそもisNaN、es6でnumber.isNaNが出て殺される可能性があるんだよなあ
        if(typeof num==="number"　&& !(isNaN(num)) ){
@@ -26,9 +30,9 @@ $(function () {
        }else{
            num=0;
        }
+       let newElem= $(this).clone(true);
        newElem.insertAfter(this);
        newElem.attr("class","flexbox"+num);
-        
     });
     $repo = $("#repo");
     $pass = $("#pass");
