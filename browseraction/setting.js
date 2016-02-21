@@ -19,17 +19,14 @@ $(function () {
         //一番でかい数字を保管
         var num=0;
         $("div[class^='flexbox']").each(function (i) {
-           num= $(this).attr("class").substr(-1,1);
-           num=num-0;//str to int
+            let crr=$(this).attr("class").substr(-1,1);
+           crr=crr-0;//str to int
+           if(crr > num){
+               num=crr;
+           }
         });
-        
-       //ちゃんと飛んだはいいけど合計4回もイベントバブリングしてるのやめてください（ガチギレ
-       //そもそもisNaN、es6でnumber.isNaNが出て殺される可能性があるんだよなあ
-       if(typeof num==="number"　&& !(isNaN(num)) ){
-           num++;
-       }else{
-           num=0;
-       }
+        //せっかくがんばってif書いたのに使わずに行けたorz
+        num++;
        let newElem= $(this).clone(true);
        newElem.insertAfter(this);
        newElem.attr("class","flexbox"+num);
