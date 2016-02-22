@@ -9,7 +9,7 @@ $(function () {
     $gtime = $("#githubtime");
     $inputhash = $(".flexbox");
     $inputhash.click(function (e) {
-        //e.preventDefault();
+        e.preventDefault();
         //okクリックされると<input>が増える。
         //tureはeventもコピーするか
 
