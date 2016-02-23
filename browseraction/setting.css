@@ -39,7 +39,7 @@ label{
     width:50%;
     margin: 10px auto;
 }
-div[class$="flexbox"]{
+div[class^="flexbox"]{
         background-color: #c2e;
     display: flex;
     margin: 0 40px;
