@@ -10,6 +10,7 @@ $(function () {
     $inputhash = $(".flexbox");
     $inputhash.click(function (e) {
         e.preventDefault();
+        //一応完成。やったね！
         //okクリックされると<input>が増える。
         //tureはeventもコピーするか
 
