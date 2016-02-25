@@ -120,10 +120,24 @@ $(function () {
                var $repo = $("#repo");
                var $pass = $("#pass");
                var $username = $("#username");
+               
+               var $flexbox = $("div[class^='flexbox']");
+               var obj={};
+               $flexbox.each(i){
+                    var crr = $(this).attr("class").substr(-1, 1);
+                    crr = crr - 0;//str to int
+                    if(typeof crr==="number"&& !(isNaN(crr) ){
+                        //子孫要素を取る
+                        let xpath=$(this).find(".xpath").val();
+                        let regexp=$(this).find(".regexp").val();
+                        obj[regexp]=xpath;
+                    }
+
+               };
 
                
                 let inputarray = [ $ltime,$gtime,$url, $repo, $pass, $username];
-                var obj = {};
+                
                 
                 //もしかしたらbackgroundscriptに投げることが必要かも
                 for (var i of inputarray) {
@@ -151,6 +165,8 @@ $(function () {
         
     });
 
+
+//同じ関数２つも書いてて死ゾ
 
 //TODO: 一回localstrageを変える(他のタブに移動したり、ブラウザを再起動させると)消える？
 //regexとxpathの組み合わせをオブジェクトにしていく。
