@@ -9,28 +9,35 @@ $(function () {
     $gtime = $("#githubtime");
     $inputhash = $(".flexbox");
     $inputhash.click(function (e) {
-        e.preventDefault();
-        //一応完成。やったね！
-        //okクリックされると<input>が増える。
-        //tureはeventもコピーするか
-
-        //flexboxのjqueryobjを全部取ってくる。その中から一番でかい数字を取ってくる。その後一番でかい数字に1を足す。
-        //複数のflexbox
         
-        //一番でかい数字を保管
-        var num=0;
-        $("div[class^='flexbox']").each(function (i) {
-            let crr=$(this).attr("class").substr(-1,1);
-           crr=crr-0;//str to int
-           if(crr > num){
-               num=crr;
-           }
-        });
-        //せっかくがんばってif書いたのに使わずに行けたorz
-        num++;
-       let newElem= $(this).clone(true);
-       newElem.insertAfter(this);
-       newElem.attr("class","flexbox"+num);
+        //よくわからんけどthisのclassは全てflexboxになってる
+        //FIXME:子要素クリックした時にも発火されるのでそれの制御
+        //labelの要素
+        if (/tes/.test((e.toElement).attr("class")) ) {
+
+            e.preventDefault();
+            //一応完成。やったね！
+            //okクリックされると<input>が増える。
+            //tureはeventもコピーするか
+
+            //flexboxのjqueryobjを全部取ってくる。その中から一番でかい数字を取ってくる。その後一番でかい数字に1を足す。
+            //複数のflexbox
+        
+            //一番でかい数字を保管
+            var num = 0;
+            $("div[class^='flexbox']").each(function (i) {
+                let crr = $(this).attr("class").substr(-1, 1);
+                crr = crr - 0;//str to int
+                if (crr > num) {
+                    num = crr;
+                }
+            });
+            //せっかくがんばってif書いたのに使わずに行けたorz
+            num++;
+            let newElem = $(this).clone(true);
+            newElem.insertAfter(this);
+            newElem.attr("class", "flexbox" + num);
+        }
     });
     $repo = $("#repo");
     $pass = $("#pass");
@@ -121,21 +128,23 @@ $(function () {
                var $pass = $("#pass");
                var $username = $("#username");
                
-               var $flexbox = $("div[class^='flexbox']");
-               var obj={};
-               $flexbox.each(i){
+              
+               var regpathobj={};
+               
+               //flexbox
+               $("div[class^='flexbox']").each(function(i){
                     var crr = $(this).attr("class").substr(-1, 1);
                     crr = crr - 0;//str to int
-                    if(typeof crr==="number"&& !(isNaN(crr) ){
+                    if(typeof crr ==="number"&& !(isNaN(crr)) ){
                         //子孫要素を取る
                         let xpath=$(this).find(".xpath").val();
                         let regexp=$(this).find(".regexp").val();
-                        obj[regexp]=xpath;
+                        regpathobj[regexp]=xpath;
                     }
-
-               };
-
+               });
                
+
+               var obj={};
                 let inputarray = [ $ltime,$gtime,$url, $repo, $pass, $username];
                 
                 
@@ -145,7 +154,9 @@ $(function () {
                     obj[i.attr("id")] = i.val()
                 }
                 chrome.storage.local.set(obj, function () { });
-                chrome.storage.local.set(getRegEx_Xpath_object(), function () { });
+                
+                //getRegEx_Xpath_object()
+                chrome.storage.local.set(regpathobj, function () { });
                 console.log(obj);
             } else {
         
@@ -164,7 +175,7 @@ $(function () {
         }
         
     });
-
+/*
 
 //同じ関数２つも書いてて死ゾ
 
@@ -188,3 +199,4 @@ function getRegEx_Xpath_object(){
     }
     return JSON.stringify(obj);
 }
+*/
