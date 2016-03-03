@@ -3,9 +3,10 @@
 (function init() {
     //setting.jsからchrome.strage.localに保存したデータの読み出し
     //TODO:"object{url:xpath}"なデータを追加urlの正規表現がキーでvalはそのURLのどの部分のhtmlを抜き出すかのxpath
+    console.log("init");
     chrome.storage.local.get(["url", "repo", "pass", "username", "RegEx_Xpath_obj"], function (result) {
         console.log(result.url, result.repo, result.pass, result.username, result.RegEx_Xpath_obj);
-        if (checkRegEx(result.url)) {//正規表現にマッチしているか？        
+        if (checkRegEx(result.RegEx_Xpath_obj)) {//正規表現にマッチしているか？        
             console.log(result);
             main(result);
         }
@@ -18,13 +19,16 @@ function checkRegEx(reg) {
     //TODO:中身を作る
     //TODO:データ構造を変更
     //regはオブジェクトにする予定
-    console.log(reg);
+    console.log(Object.keys(reg));
     var url = window.location.href;
-    for (var i in reg) {
-        if (i.test(url)){
-           return 1;
-        }
-    }
+    // for (var i in reg) {
+    //     console.log(typeof reg.i)
+    //         console.log(typeof i)
+    //     if ( i.test(url) ){
+    //         console.log("regexpclear")
+    //        return 1;
+    //     }
+    // }
     return 0;
 }
 function main(d) {
@@ -117,8 +121,8 @@ function analyzeURL() {
 
 
 chrome.storage.onChanged.addListener(function (changes, namespace) {
-    chrome.storage.local.get(["url", "repo", "pass", "username"], function (result) {
-        console.log(result.url, result.repo, result.pass, result.username);
+    chrome.storage.local.get(["RegEx_Xpath_obj", "repo", "pass", "username"], function (result) {
+        console.log(result.RegEx_Xpath_obj, result.repo, result.pass, result.username);
     });
 });
 

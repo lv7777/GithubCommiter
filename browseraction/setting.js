@@ -130,6 +130,16 @@ $(function () {
                
               
                var regpathobj={};
+/*
+{
+    ".*":"xpath","":""
+}
+の組み合わせにするとエラーが出るので
+
+githubのissueみて、どうぞ
+*/
+               var regarr=[];
+               var xpatharr=[];
                
                //flexbox
                $("div[class^='flexbox']").each(function(i){
@@ -139,9 +149,12 @@ $(function () {
                         //子孫要素を取る
                         let xpath=$(this).find(".xpath").val();
                         let regexp=$(this).find(".regexp").val();
-                        regpathobj[regexp]=xpath;
+                        xpatharr.push(xpath);
+                        regarr.push(regexp);
                     }
                });
+               regpathobj["regexp"]=regarr;
+               regpathobj["xpath"]=xpatharr;
                
 
                var obj={};
