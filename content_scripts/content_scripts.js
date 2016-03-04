@@ -4,7 +4,7 @@
     //setting.jsからchrome.strage.localに保存したデータの読み出し
     //TODO:"object{url:xpath}"なデータを追加urlの正規表現がキーでvalはそのURLのどの部分のhtmlを抜き出すかのxpath
     console.log("init");
-    chrome.storage.local.get(["url", "repo", "pass", "username", "RegEx_Xpath_obj"], function (result) {
+    chrome.storage.local.get(["url", "repo", "pass", "username", "RegEx_Xpath_obj"],function(result) {
         console.log(result.url, result.repo, result.pass, result.username, result.RegEx_Xpath_obj);
         if (checkRegEx(result.RegEx_Xpath_obj)) {//正規表現にマッチしているか？        
             console.log(result);
@@ -13,23 +13,25 @@
     });
 })();
 
-
 //未テスト
 function checkRegEx(reg) {
-    //TODO:中身を作る
-    //TODO:データ構造を変更
-    //regはオブジェクトにする予定
-    console.log(Object.keys(reg));
+    //データ構造変更
+    //regはオブジェクトにする予定謎系オブジェクトになったsee #15
+    //undefをよみこんでエラー吐くのをstop
+    
+    var regarr=reg.regexp;
+    var xpatharr=reg.xpath;
     var url = window.location.href;
-    // for (var i in reg) {
-    //     console.log(typeof reg.i)
-    //         console.log(typeof i)
-    //     if ( i.test(url) ){
-    //         console.log("regexpclear")
-    //        return 1;
-    //     }
-    // }
+    for (var i =0; i<regarr.length;i++) {
+        console.log(typeof regarr);
+        var regobj=new RegExp(regarr[i])
+        if ( regobj.test(url) ){
+            console.log("regexpclear");
+           return 1;
+        }
+    }
     return 0;
+    
 }
 function main(d) {
     if (document.designMode == "on") {
