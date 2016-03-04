@@ -9,4 +9,4 @@ getpagedocumentとかわかりにくいかも
 at p10
 シソーラスを使え。
 
-
+settingjsのjqueryオブジェクトをどうするか
