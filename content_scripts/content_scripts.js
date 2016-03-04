@@ -95,7 +95,7 @@ function getFileName(o) {
     return filename;
 }
 function analyzeURL() {
-    var retobj = {};
+    var urlparts = {};
     /*
     {
         allurl:URL全て
@@ -105,21 +105,21 @@ function analyzeURL() {
      */
     
     //部分に分割
-    retobj.allurl = window.location.href;
+    urlparts.allurl = window.location.href;
     //汚いobjだなあ
-    var arr = retobj.allurl.match(/^(.*?)(\:\/\/\/?)(.*?)[\:[0-9]*]?(\/.*?)?$/i);//でもこれよく考えたら認証情報がドメインパートにはいってるな
-    retobj.urlarr = arr;
-    retobj.schimeonly = arr[1];
-    retobj.urisubpart = arr[2];
-    retobj.domainall = arr[3];
-    retobj.pathall = arr[4];
+    var arr = urlparts.allurl.match(/^(.*?)(\:\/\/\/?)(.*?)[\:[0-9]*]?(\/.*?)?$/i);//でもこれよく考えたら認証情報がドメインパートにはいってるな
+    urlparts.urlarr = arr;
+    urlparts.schimeonly = arr[1];
+    urlparts.urisubpart = arr[2];
+    urlparts.domainall = arr[3];
+    urlparts.pathall = arr[4];
 
-    retobj.domainarr = retobj.domainall.split(".");
-    retobj.patharr = retobj.pathall.split("/");
-    retobj.filename = getFileName(retobj);
+    urlparts.domainarr = urlparts.domainall.split(".");
+    urlparts.patharr = urlparts.pathall.split("/");
+    urlparts.filename = getFileName(urlparts);
 
-    retobj.dirpath = retobj.domainarr.join("/");
-    return retobj;
+    urlparts.dirpath = urlparts.domainarr.join("/");
+    return urlparts;
 }
 
 
