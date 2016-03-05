@@ -44,7 +44,8 @@ function main(d) {
             update(encodesrc, d.username, d.pass, d.repo, urlobj.dirpath, urlobj.filename);
         } else {
             //create
-            create(encodesrc, d.username, d.pass, d.repo, urlobj.dirpath, urlobj.filename);
+            createrepo();
+            createfile(encodesrc, d.username, d.pass, d.repo, urlobj.dirpath, urlobj.filename);
         }
     } else {
         console.log("no active");
@@ -155,8 +156,26 @@ function filesendAPIararysis(username, repo, pass) {
     xhr.open("GET", "https://api.github.com/repos/" + username + "/" + repo + "/contents/" + obj.dirpath + "/" + obj.filename);
     xhr.send(null);
 }
+function createrepo(username,pass,repo){
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
 
-function create(encodedata, username, pass, repo, path, file) {
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            console.log(this.responseText);
+        }
+    });
+    xhr.open("PUT", "https://api.github.com/repos/");
+    let basic = window.btoa(unescape(encodeURIComponent(username + ":" + pass)));
+    xhr.setRequestHeader("authorization", "Basic " + basic);
+
+    xhr.setRequestHeader("name", repo);
+    xhr.setRequestHeader("content-type", "application/json");
+    xhr.setRequestHeader("cache-control", "no-cache");
+
+    xhr.send(data);
+}
+function createfile(encodedata, username, pass, repo, path, file) {
     var data = JSON.stringify({
         "message": "my commit message",
         "branch": "master",
@@ -172,7 +191,8 @@ function create(encodedata, username, pass, repo, path, file) {
         }
     });
 
-
+//post時にはpathいらない？
+//ていうか一回作ってからじゃないと無理じゃね？
     xhr.open("PUT", "https://api.github.com/repos/" + username + "/" + repo + "/contents/" + path);
     let basic = window.btoa(unescape(encodeURIComponent(username + ":" + pass)));
     xhr.setRequestHeader("authorization", "Basic " + basic);
